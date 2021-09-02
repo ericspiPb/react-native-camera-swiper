@@ -3,8 +3,6 @@ import { Dimensions, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { useSharedValue, withSpring, useAnimatedStyle, useAnimatedGestureHandler, runOnUI } from 'react-native-reanimated';
 import { GestureEventPayload, PanGestureHandler, PanGestureHandlerEventPayload, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 
-import NativeCamera from 'components/camera.component.native';
-
 const styles = StyleSheet.create({
   box: {
     flex: 1,
