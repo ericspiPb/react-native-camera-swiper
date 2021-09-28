@@ -1,13 +1,10 @@
 import React from 'react';
 import { View, TouchableWithoutFeedback, TouchableOpacity, GestureResponderEvent } from 'react-native';
-import { Camera } from 'expo-camera';
 import { CameraType, FlashMode } from 'expo-camera/build/Camera.types';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from './camera.toolbar.styles';
-
-const { FlashMode: CameraFlashModes, Type: CameraTypes } = Camera.Constants;
 
 export interface CameraToolbarProps {
   capturing: boolean;
@@ -26,8 +23,8 @@ function CameraToolbar(props: CameraToolbarProps) {
     <Grid style={styles.bottomToolbar}>
       <Row>
         <Col style={styles.alignCenter}>
-          <TouchableOpacity onPress={() => props.setFlashMode?.(props.flashMode === CameraFlashModes.on ? CameraFlashModes.off : CameraFlashModes.on)}>
-            <Ionicons name={props.flashMode === CameraFlashModes.on ? 'md-flash' : 'md-flash-off'} color="white" size={30} />
+          <TouchableOpacity onPress={() => props.setFlashMode?.(props.flashMode === FlashMode.on ? FlashMode.off : FlashMode.on)}>
+            <Ionicons name={props.flashMode === FlashMode.on ? 'md-flash' : 'md-flash-off'} color="white" size={30} />
           </TouchableOpacity>
         </Col>
         <Col size={2} style={styles.alignCenter}>
@@ -41,7 +38,9 @@ function CameraToolbar(props: CameraToolbarProps) {
           </TouchableWithoutFeedback>
         </Col>
         <Col style={styles.alignCenter}>
-          <TouchableOpacity onPress={() => props.setCameraType?.(props.cameraType === CameraTypes.back ? CameraTypes.front : CameraTypes.back)}>
+          <TouchableOpacity onPress={() => {
+            props.setCameraType?.(props.cameraType === CameraType.back ? CameraType.front : CameraType.back);
+          }}>
             <Ionicons name="camera-reverse" color="white" size={30} />
           </TouchableOpacity>
         </Col>
@@ -52,8 +51,8 @@ function CameraToolbar(props: CameraToolbarProps) {
 
 CameraToolbar.defaultProps = {
   capturing: false,
-  cameraType: CameraTypes.back,
-  flashMode: CameraFlashModes.off,
+  cameraType: CameraType.back,
+  flashMode: FlashMode.off,
 };
 
 export default CameraToolbar;

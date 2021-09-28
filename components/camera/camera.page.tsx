@@ -1,4 +1,4 @@
-import React, { LegacyRef } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import { Camera } from 'expo-camera';
 import { CameraType, FlashMode } from 'expo-camera/build/Camera.types';
@@ -14,22 +14,16 @@ export default class CameraPage extends React.Component {
 
   state = {
     hasCameraPermission: null,
-    flashMode: Camera.Constants.FlashMode.off,
-    cameraType: Camera.Constants.Type.back,
+    flashMode: FlashMode.off,
+    cameraType: CameraType.back,
     captures: [],
     capturing: false,
   };
 
-  async componentDidMount() {
-    const camera = await Camera.requestPermissionsAsync();
-    const audio = await Audio.requestPermissionsAsync();
-    const hasCameraPermission = camera.status === 'granted' && audio.status === 'granted';
-
-    this.setState({ hasCameraPermission });
-  }
-
   setFlashMode = (flashMode: FlashMode) => this.setState({ flashMode });
-  setCameraType = (cameraType: CameraType) => this.setState({ cameraType });
+  setCameraType = (cameraType: CameraType) => {
+    this.setState({ cameraType });
+  }
 
   handleCaptureIn = () => this.setState({ caturing: true });
   handleCaptureOut = () => {
@@ -45,6 +39,14 @@ export default class CameraPage extends React.Component {
     this.setState({ capturing: false, captures: [videoData, ...this.state.captures] });
   };
 
+  async componentDidMount() {
+    const camera = await Camera.requestPermissionsAsync();
+    const audio = await Audio.requestPermissionsAsync();
+    const hasCameraPermission = camera.status === 'granted' && audio.status === 'granted';
+
+    this.setState({ hasCameraPermission });
+  }
+
   render() {
     const { hasCameraPermission, flashMode, cameraType, capturing, captures } = this.state;
 
@@ -59,8 +61,9 @@ export default class CameraPage extends React.Component {
         <Camera type={cameraType} flashMode={flashMode} style={styles.preview} ref={(camera) => (this.camera = camera)} />
         {captures.length > 0 && <Gallery captures={captures} />}
         <Toolbar
-          capturing={capturing}
           flashMode={flashMode}
+          cameraType={cameraType}
+          capturing={capturing}
           setFlashMode={this.setFlashMode}
           setCameraType={this.setCameraType}
           onCaptureIn={this.handleCaptureIn}

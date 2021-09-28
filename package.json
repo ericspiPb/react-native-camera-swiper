@@ -9,28 +9,28 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.5",
-    "@react-navigation/native": "^6.0.2",
-    "expo": "~42.0.1",
+    "@react-navigation/native": "^6.0.4",
+    "expo": "~42.0.4",
     "expo-av": "^9.2.3",
     "expo-camera": "~11.2.2",
     "expo-status-bar": "~1.0.4",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-easy-grid": "^0.2.2",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-reanimated": "~2.2.0",
-    "react-native-redash": "^16.2.0",
-    "react-native-safe-area-context": "3.2.0",
-    "react-native-screens": "~3.4.0",
-    "react-native-web": "~0.13.12"
+    "react-native-reanimated": "~2.2.2",
+    "react-native-redash": "^16.2.2",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.8.0",
+    "react-native-web": "~0.17.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@types/react": "~16.9.35",
-    "@types/react-native": "~0.63.2",
+    "@babel/core": "^7.15.5",
+    "@types/react": "~17.0.24",
+    "@types/react-native": "~0.65.1",
     "react-native-typescript-transformer": "^1.2.13",
-    "typescript": "~4.0.0"
+    "typescript": "~4.4.3"
   },
   "private": true
 }
