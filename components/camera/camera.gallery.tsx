@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { View, Image, ScrollView } from 'react-native';
 import { Video } from 'expo-av';
 
