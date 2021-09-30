@@ -7,7 +7,7 @@ import { Audio } from 'expo-av';
 import Toolbar from './camera.toolbar';
 import Gallery from './camera.gallery';
 
-import styles from './camera.page.styles';
+import styles from './camera.screen.styles';
 
 export default class CameraPage extends React.Component {
   camera: Camera | null = null;
