@@ -9,6 +9,11 @@ import Gallery from './camera.gallery';
 
 import styles from './camera.screen.styles';
 
+export interface CameraRecording {
+  uri: string;
+  codec?: VideoCodec;
+}
+
 export interface CameraProps {
   style?: StyleProp<ViewStyle>;
 }
@@ -17,16 +22,8 @@ export interface CameraState {
   hasCameraPermission: boolean | null;
   flashMode: FlashMode;
   cameraType: CameraType;
-  captures?:
-    | Array<CameraCapturedPicture>
-    | Array<
-        | {
-            uri: string;
-            codec?: VideoCodec;
-          }
-        | undefined
-      >;
   capturing: boolean;
+  captures: Array<CameraCapturedPicture> | Array<CameraRecording>;
 }
 
 export default class CameraScreen extends React.Component<CameraProps, CameraState> {
@@ -36,8 +33,8 @@ export default class CameraScreen extends React.Component<CameraProps, CameraSta
     hasCameraPermission: null,
     flashMode: FlashMode.off,
     cameraType: CameraType.back,
-    captures: [],
     capturing: false,
+    captures: [],
   };
 
   constructor(public props: CameraProps) {
@@ -51,15 +48,15 @@ export default class CameraScreen extends React.Component<CameraProps, CameraSta
 
   handleCaptureIn = () => this.setState({ capturing: true });
   handleCaptureOut = () => {
-    if (this.state.capturing) this.camera?.stopRecording();
+    if (this.state.capturing) this.camera!.stopRecording();
   };
 
   handleShortCapture = async () => {
-    const photoData = await this.camera?.takePictureAsync();
+    const photoData = await this.camera!.takePictureAsync();
     this.setState({ capturing: false, captures: [photoData, ...this.state.captures] });
   };
   handleLongCapture = async () => {
-    const videoData = await this.camera?.recordAsync();
+    const videoData = await this.camera!.recordAsync();
     this.setState({ capturing: false, captures: [videoData, ...this.state.captures] });
   };
 
@@ -82,19 +79,22 @@ export default class CameraScreen extends React.Component<CameraProps, CameraSta
 
     return (
       <View style={this.props?.style}>
-        <Camera type={cameraType} flashMode={flashMode} style={styles.preview} ref={(camera) => (this.camera = camera)} />
+        <Camera type={cameraType} flashMode={flashMode} style={styles.preview} ref={camera => this.camera = camera} />
         {captures.length > 0 && <Gallery captures={captures} />}
-        <Toolbar
-          flashMode={flashMode}
-          cameraType={cameraType}
-          capturing={capturing}
-          setFlashMode={this.setFlashMode}
-          setCameraType={this.setCameraType}
-          onCaptureIn={this.handleCaptureIn}
-          onCaptureOut={this.handleCaptureOut}
-          onShortCapture={this.handleShortCapture}
-          onLongCapture={this.handleLongCapture}
-        />
+        {
+          hasCameraPermission &&
+          <Toolbar
+            flashMode={flashMode}
+            cameraType={cameraType}
+            capturing={capturing}
+            setFlashMode={this.setFlashMode}
+            setCameraType={this.setCameraType}
+            onCaptureIn={this.handleCaptureIn}
+            onCaptureOut={this.handleCaptureOut}
+            onShortCapture={this.handleShortCapture}
+            onLongCapture={this.handleLongCapture}
+          />
+        }
       </View>
     );
   }

@@ -24,15 +24,15 @@ function CameraToolbar(props: CameraToolbarProps) {
       <Row>
         <Col style={styles.alignCenter}>
           <TouchableOpacity onPress={() => props.setFlashMode?.(props.flashMode === FlashMode.on ? FlashMode.off : FlashMode.on)}>
-            <Ionicons name={props.flashMode === FlashMode.on ? 'md-flash' : 'md-flash-off'} color="white" size={30} />
+            <Ionicons name={props.flashMode === FlashMode.on ? 'md-flash' : 'md-flash-off'} color='white' size={30} />
           </TouchableOpacity>
         </Col>
         <Col size={2} style={styles.alignCenter}>
           <TouchableWithoutFeedback
             onPressIn={props.onCaptureIn}
             onPressOut={props.onCaptureOut}
-            onLongPress={props.onLongCapture}
             onPress={props.onShortCapture}
+            onLongPress={props.onLongCapture}
           >
             <View style={[styles.captureBtn, props.capturing && styles.captureBtnActive]}>{props.capturing && <View style={styles.captureBtnInternal} />}</View>
           </TouchableWithoutFeedback>
@@ -41,7 +41,7 @@ function CameraToolbar(props: CameraToolbarProps) {
           <TouchableOpacity onPress={() => {
             props.setCameraType?.(props.cameraType === CameraType.back ? CameraType.front : CameraType.back);
           }}>
-            <Ionicons name="camera-reverse" color="white" size={30} />
+            <Ionicons name='camera-reverse' color='white' size={30} />
           </TouchableOpacity>
         </Col>
       </Row>
@@ -50,9 +50,9 @@ function CameraToolbar(props: CameraToolbarProps) {
 }
 
 CameraToolbar.defaultProps = {
-  capturing: false,
   cameraType: CameraType.back,
   flashMode: FlashMode.off,
+  capturing: false,
 };
 
 export default CameraToolbar;

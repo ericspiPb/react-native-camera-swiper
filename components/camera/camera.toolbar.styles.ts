@@ -19,7 +19,7 @@ export default StyleSheet.create({
     height: 60,
     borderWidth: 2,
     borderRadius: 60,
-    borderColor: "#FFFFFF",
+    borderColor: '#FFFFFF',
   },
   captureBtnActive: {
     width: 80,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     height: 76,
     borderWidth: 2,
     borderRadius: 76,
-    backgroundColor: "red",
-    borderColor: "transparent",
+    backgroundColor: 'red',
+    borderColor: 'transparent',
   },
 });
