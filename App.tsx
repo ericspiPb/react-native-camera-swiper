@@ -2,12 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import CameraPage from './components/camera/camera.page';
+import CameraScreen from './components/camera/camera.screen';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <CameraPage />
+      <CameraScreen />
       <StatusBar style='auto' />
     </SafeAreaView>
   );
